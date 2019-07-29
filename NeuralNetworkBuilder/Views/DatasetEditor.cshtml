@@ -1,0 +1,156 @@
+﻿@page
+<!--
+    * Author: Michel Schlatter
+    * Date: 28.07.2019
+    * Version: 1.0
+-->
+
+@{
+    Layout = "_Layout";
+}
+@using NeuralNetworkBuilder.Custom
+
+@section Head{
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+}
+
+@section Scripts{
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Frameworks/jsoneditor.min.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Pages/DatasetEditor.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Services/DatasetService.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Modules/VectorGrid.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Modules/DatasetInfoViewer.js?v=" + ViewUtils.GetVersion())"></script>
+
+    <link href="@Url.Content("~/Style/jsoneditor.css?v=" + ViewUtils.GetVersion())" rel="stylesheet">
+}
+
+<form id="datasetEditor">
+    <h1>Dataset Editor</h1>
+
+    <div class="row">
+        <div class="col-md-2">
+            <label class="labelInline">Choose Dataset:</label>
+        </div>
+        <div class="col-md-3">
+            <select id="datasets" class="form-control"></select>
+        </div>
+        <div class="col-md-1">
+            <button id="datasetInfo" class="btn btn-primary" style="height:38px">
+                <span class="fas fa-info" style="width:11px;"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <label class="labelInline">Name:</label>
+        </div>
+        <div class="col-md-3">
+            <input id="datasetName" name="datasetName" class="form-control" placeholder="Dataset name">
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <label class="labelInline">Privacy:</label>
+        </div>
+        <div class="col-md-3">
+            <label class="radio labelInline">
+                <input id="privateFlag" type="radio" name="privacyFlags" value="1">Private
+            </label>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-7">
+            <label class="radio labelInline">
+                <input id="publicFlag" type="radio" name="privacyFlags" value="2" checked>Public
+            </label>
+        </div>
+    </div>
+
+
+    <div class="spacer"></div>
+
+
+    <div class="row">
+        <div id="jsonEditor1" class="col-md-5"></div>
+        <div id="jsonEditor2" class="col-md-5"></div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div id="gridHelperContainer">
+        <label id="vectorHelperLabel" class="labelInline">Vector Helper</label>
+        <div id="vectorHelperContainer">
+            <div class="row">
+                <div id="gridContainer" class="col-md-7">
+                </div>
+            </div>
+
+            <div class="spacer"></div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <input id="inputVector" name="inputVector" class="form-control" placeholder="e.g [1,0,1,0,1]">
+                </div>
+                <div class="col-md-3">
+                    <button id="btnDrawVector" class="btn btn-primary col-md-12">
+                        <span class="fas fa-paint-brush"></span> Draw
+                    </button>
+                </div>
+            </div>
+
+            <div class="spacer"></div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <button id="btnClearAll" class="btn btn-primary col-md-12">
+                        <span class="fas fa-trash"></span> Clear Grid
+                    </button>
+                </div>
+                <div class="col-md-3">
+                    <button id="btnCopyVector" class="btn btn-primary col-md-12">
+                        <span id="btnCopyVectorIcon" class="far fa-copy"></span> Copy Grid Vector to Clipboard
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="spacer"></div>
+
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-10">
+            <button id="btnSave" class="btn btn-primary col-md-12">
+                <span class="far fa-save "></span> Save
+            </button>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-10">
+            <button id="btnDelete" class="btn btn-danger col-md-12">
+                <span class="fas fa-trash-alt"></span> Delete
+            </button>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    @Html.Partial("DatasetInfoDialog")
+</form>
+
+@section RunScript{
+    var datasetEditor = new DatasetEditor();
+    datasetEditor.init();
+}

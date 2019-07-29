@@ -1,0 +1,419 @@
+﻿@page
+<!--
+    * Author: Michel Schlatter
+    * Date: 28.07.2019
+    * Version: 1.0
+-->
+
+@{
+    Layout = "_Layout";
+}
+@using NeuralNetworkBuilder.Custom
+@section Scripts{
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Frameworks/tensorflow.min.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Frameworks/chart.min.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Pages/NeuralNetworkBuilder.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Pages/NeuralNetworkLearner.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Pages/NeuralNetworkComputer.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Frameworks/d3.min.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Modules/NeuralNetworkVisualizer.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Services/DatasetService.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Modules/NeuralNetwork.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Modules/LineChart.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Modules/VectorGrid.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Helpers/NnDrawHelper.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Modules/DatasetInfoViewer.js?v=" + ViewUtils.GetVersion())"></script>
+
+
+    <link href="@Url.Content("~/Style/NeuralNetworkViewer.css?v=" + ViewUtils.GetVersion())" rel="stylesheet">
+    <link href="@Url.Content("~/Style/Chart.min.css?v=" + ViewUtils.GetVersion())" rel="stylesheet">
+
+}
+
+
+
+
+
+
+<form id="neuralNetworkBuilder">
+    <h1> Build the Architecture</h1>
+
+    <div class="row">
+        <div class="col-md-2">
+            <label class="labelInline">Choose Dataset:</label>
+        </div>
+        <div class="col-md-6">
+            <select id="architectureBuilderDataset" name="architectureBuilderDataset" class="form-control"></select>
+        </div>
+        <div class="col-md-1">
+            <button id="datasetInfoArchitectureBuilder" class="btn btn-primary" style="height:38px">
+                <span class="fas fa-info" style="width:11px;"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div id="inputLayer" class="row">
+        <div class="col-md-2">
+            <label class="labelInline">Input:</label>
+        </div>
+        <div class="col-md-2">
+            <input name="neurons" type="number" class="form-control" placeholder="Neurons">
+        </div>
+        <div class="col-md-2">
+            <select name="activation" class="form-control" disabled>
+                <option value="" selected>Activation</option>
+                <option value="linear">Linear</option>
+                <option value="relu">ReLU</option>
+                <option value="sigmoid">Sigmoid</option>
+                <option value="tanh">Tanh</option>
+                <option value="softmax">Softmax</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select name="" class="form-control" disabled>
+                <option value="" selected>Bias</option>
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+        </div>
+    </div>
+
+    @*HIDDEN LAYER BEGIN*@
+
+    <div id="hiddenLayerContainer">
+
+        <div id="activeHiddenLayers">
+
+        </div>
+
+        <div id="hiddenLayerTemplate" name="hiddenLayerEntry" hiddenLayer="-1" style="display:none;">
+            <div class="spacer"></div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label name="description" class="labelInline">Hidden {0}:</label>
+                </div>
+                <div class="col-md-2">
+                    <input name="neurons" type="number" class="form-control" placeholder="Neurons">
+                </div>
+                <div class="col-md-2">
+                    <select name="activation" class="form-control">
+                        <option value="" disabled selected>Activation</option>
+                        <option value="linear">Linear</option>
+                        <option value="relu">ReLU</option>
+                        <option value="sigmoid">Sigmoid</option>
+                        <option value="tanh">Tanh</option>
+                        <option value="softmax">Softmax</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select name="bias" class="form-control">
+                        <option value="" disabled selected>Bias</option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <button name="btnDeleteLayer" hiddenLayer="-1" class="btn btn-danger" style="height:38px">
+                        <span class="fas fa-times"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <button id="btnAddNewHiddenLayer" class="btn btn-primary col-xs-12">
+            <span class="fas fa-plus "></span> Add Hidden Layer
+        </button>
+
+        <div class="spacer"></div>
+    </div>
+
+    @*HIDDEN LAYER END*@
+
+
+    <div id="outputLayer" class="row">
+        <div class="col-md-2">
+            <label class="labelInline">Output:</label>
+        </div>
+        <div class="col-md-2">
+            <input name="neurons" type="number" class="form-control" placeholder="Neurons">
+        </div>
+        <div class="col-md-2">
+            <select name="activation" class="form-control">
+                <option value="" disabled selected>Activation</option>
+                <option value="linear">Linear</option>
+                <option value="relu">ReLU</option>
+                <option value="sigmoid">Sigmoid</option>
+                <option value="tanh">Tanh</option>
+                <option value="softmax">Softmax</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select name="bias" class="form-control">
+                <option value="" disabled selected>Bias</option>
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <button id="btnSaveArchitecture" class="btn btn-primary col-md-12" style="margin-top:30px;" disabled>
+                <span class="fas fa-arrow-right "></span> Continue to Training
+            </button>
+        </div>
+    </div>
+
+
+    <div class="spacer"></div>
+    <label id="nnBuilderVisualizationLabel" style="font-size:20px;">Visualization: <span class="rendering" style="display:none">rendering...</span></label>
+
+    <div id="architectureNeuralNetworkViewer" style="width:100%;margin-top:0px;">
+        <div id="nnbv" class="jumbotron" style="background-color:white;">
+
+        </div>
+    </div>
+
+</form>
+
+<form id="neuralNetworkLearner" style="display:none;">
+    <h1> Train the Weights</h1>
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <button id="btnBackToArchitecture" class="btn btn-primary col-md-12">
+                <span class="fas fa-arrow-left"></span> Edit Architecture
+            </button>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <label class="labelInline">Optimizer:</label>
+        </div>
+        <div class="col-md-6">
+            <select id="optimizer" name="optimizer" class="form-control">
+                <option value="sgd">SGD</option>
+                <option value="sgdm">SGD Momentum</option>
+                <option value="adam">Adam</option>
+                <option value="rmsprop">RMSprop</option>
+            </select>
+        </div>
+        <div class="col-md-1">
+            <button id="optimizerInfo" class="btn btn-primary" style="height:38px">
+                <span class="fas fa-info" style="width:11px;"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <label class="labelInline">Loss:</label>
+        </div>
+        <div class="col-md-6">
+            <select id="loss" name="loss" class="form-control">
+                <option value="mse">Mean Squared Error</option>
+                <option value="sce">Softmax Cross Entropy</option>
+            </select>
+        </div>
+        <div class="col-md-1">
+            <button id="lossInfo" class="btn btn-primary" style="height:38px">
+                <span class="fas fa-info" style="width:11px;"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <label class="labelInline">Optimizer Settings:</label>
+        </div>
+        <div class="col-md-3">
+            <input id="learningRate" name="learningRate" type="number" step="0.01" class="form-control" placeholder="Learning rate (e.g. 0.1)">
+        </div>
+        <div class="col-md-3">
+            <input id="momentum" name="momentum" type="number" step="0.01" class="form-control" placeholder="Momentum (e.g. 0.1)">
+        </div>
+        <div class="col-md-1">
+            <button id="optimizerSettingsInfo" class="btn btn-primary" style="height:38px">
+                <span class="fas fa-info" style="width:11px;"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <label class="labelInline">Maximum Iterations:</label>
+        </div>
+        <div class="col-md-6">
+            <input id="maxIterations" name="maxIterations" type="number" class="form-control" placeholder="e.g. 300">
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <label class="labelInline">Minimum Error:</label>
+        </div>
+        <div class="col-md-6">
+            <input id="minError" name="minError" type="number" step="0.01" class="form-control" placeholder="e.g 0.01">
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="row" style="margin-top:20px; margin-bottom:20px;">
+        <div class="col-md-3">
+            <button id="btnResetNetwork" class="btn btn-primary col-md-12">
+                <span class="fas fa-undo "></span> Reset Network
+            </button>
+        </div>
+
+        <div class=".d-block .d-sm-none" style="padding-top:30px;margin-top:20px;"></div>
+
+        <div class="col-md-3">
+            <button id="btnStartStopTraining" class="btn btn-primary col-md-12">
+                <span id="btnStartStopTrainingIcon" class="fas fa-play "></span>
+                <span id="btnStartStopTrainingText">Train</span>
+            </button>
+        </div>
+
+        <div class=".d-block .d-sm-none" style="padding-top:30px;margin-top:20px;"></div>
+
+        <div class="col-md-3">
+            <button id="btnContinueToComputation" class="btn btn-primary col-md-12">
+                <span id="btnContinueToComputationIcon" class="fas fa-exclamation-triangle "></span>
+                <span id="btnContinueToComputationText">Continue without Training</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9" id="trainingErrorChartContainer" style="background-color:white">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+    <label id="nnLearnerVisualizationLabel" style="font-size:20px;">Visualization: <span class="rendering" style="display:none">rendering...</span></label>
+
+    <div id="learnerNeuralNetworkViewer" style="width:100%;margin-top:0px;">
+        <div id="nnlv" class="jumbotron" style="background-color:white;">
+
+        </div>
+    </div>
+
+</form>
+
+<form id="neuralNetworkComputer" style="display:none;">
+    <h1>Compute</h1>
+
+    <button id="btnBackToTraining" class="btn btn-primary col-md-2 col-sm-12">
+        <span class="fas fa-arrow-left"></span> Back to Training
+    </button>
+
+    <div class="spacer"></div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <label class="labelInline">
+                <input id="fillByDataset" type="radio" name="inputTypeOption" value="0" checked>Choose Dataset:
+            </label>
+        </div>
+        <div class="col-md-6">
+            <select id="computerDataset" class="form-control"></select>
+        </div>
+        <div class="col-md-1">
+            <button id="datasetInfoComputer" class="btn btn-primary" style="height:38px">
+                <span class="fas fa-info" style="width:11px;"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="row" style="margin-top:10px;position:relative">
+        <div class="radio col-md-3">
+            <label class="labelInline">
+                <input id="fillManually" type="radio" name="inputTypeOption" value="1">Fill Inputs manually
+            </label>
+        </div>
+
+        <div id="inputContainer" class="col-md-4 " style="display:none; padding-left:0px;">
+        </div>
+
+        <div id="inputGridContainer" class="col-md-4" style="display:none;">
+        </div>
+        <div class="col-md-3 bottom-align-text">
+            <button id="btnClearGrid" class="btn btn-primary col-md-10" style="height:38px">
+                <span class="fas fa-broom"></span> Clear
+            </button>
+        </div>
+    </div>
+
+
+    <div class="spacer"></div>
+
+    <button id="btnCompute" class="btn btn-primary col-md-9" style="margin-top:0px;">
+        <span class="fas fa-calculator"></span> Compute
+    </button>
+
+    <div class="spacer"></div>
+
+    <div id="computeRow" class="row">
+        <div class="col-md-3">
+            <label id="computeResult" class="labelInline" style=""></label>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="row" id="consoleOutputContainer">
+        <div class="form-group shadow-textarea col-md-9">
+            <label class="labelInline" for="consoleOutput">Output:</label>
+            <textarea id="consoleOutput" class="form-control z-depth-1" style="background-color:white;min-height:300px; min-width:100%;" readonly></textarea>
+        </div>
+    </div>
+
+    <div id="computationNeuralNetworkViewerContainer">
+        <div class="spacer"></div>
+        <label id="nnComputerVisualizationLabel" style="font-size:20px;">Visualization: <span class="rendering" style="display:none">rendering...</span></label>
+        <div id="computationNeuralNetworkViewer" style="width:100%;">
+            <div id="nncv" class="jumbotron" style="background-color:white;">
+
+            </div>
+        </div>
+    </div>
+
+    <div id="inputContainerTemplate" class="col-md-6 col-sm-12" style="display:none;">
+        <input id="inputTemplate" type="number" step="1" class="form-control">
+    </div>
+
+</form>
+
+@Html.Partial("DatasetInfoDialog")
+@Html.Partial("TrainingInfoDialog")
+
+
+@section RunScript{
+    var nnLearner = new NeuralNetworkBuilder();
+    nnLearner.init();
+}

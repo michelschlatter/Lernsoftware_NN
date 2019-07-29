@@ -1,0 +1,64 @@
+﻿@page
+<!--
+    * Author: Michel Schlatter
+    * Date: 28.07.2019
+    * Version: 1.0
+-->
+
+@{
+    Layout = "_Layout";
+}
+
+@section Scripts{
+
+
+}
+
+
+<div class="jumbotron" style="margin-top:20px;background-color:white">
+    <div class="container">
+        <h1 class="display-3">Welcome!</h1>
+        <p>
+            The neural network learning software was implemented in the frame of Michel Schlatter's bachelor thesis during his studies of business information systems at the University of Applied Sciences Northwestern Switzerland.
+            The goal of the neural network learner is to give beginners in the field of machine learning a better insight into the functionality of neural networks.
+        </p>
+        <p>
+            <a class="btn btn-primary btn-lg" href="/pdfs/userguide.pdf" target="_blank" rel="noopener noreferrer" role="button"><i class="far fa-file-pdf" style="margin-right:5px;"></i>Open User Guide</a>
+            <div class="spacer .d-block .d-sm-none"></div>
+            <a class="btn btn-primary btn-lg" href="/nn" role="button">Start now &raquo;</a>
+        </p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Neural Network</h2>
+            <p>Create your own neural network architecture, train it by configuring various training settings and then use it to make predictions. </p>
+            <p><a class="btn btn-secondary" href="/nn" role="button">Start now &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Playground</h2>
+            <p>Play around with various settings of a neuronal network and observe how the settings affect the output.</p>
+            <p><a class="btn btn-secondary" href="/playground" role="button">Start now &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Datasets</h2>
+            <p>Create your own datasets which you can use to train your neural networks and share them with the community.</p>
+            <p><a class="btn btn-secondary" href="/dataseteditor" role="button">Start now &raquo;</a></p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row" style="margin-top:20px;margin-bottom:20px;">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="text-center">
+                <img class="img-fluid" src="@Url.Content("~/Style/img/nnanimation.gif")" alt="neural network animation">
+            </div>
+        </div>
+    </div>
+</div>
+
+

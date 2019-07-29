@@ -1,0 +1,46 @@
+{
+  "Description": "The dataset represents the OR-Problem.",
+  "ProblemType": "classification",
+  "items": [
+    {
+      "data": [ 0, 0 ],
+      "labels": [ 1, 0 ]
+    },
+    {
+      "data": [ 1, 0 ],
+      "labels": [ 0, 1 ]
+
+    },
+    {
+      "data": [ 0, 1 ],
+      "labels": [ 0, 1 ]
+    },
+    {
+      "data": [ 1, 1 ],
+      "labels": [ 0, 1 ]
+    }
+  ],
+  "layers": [
+    {
+      "neurons": 2
+    },
+    {
+      "neurons": 2,
+      "activation": "tanh",
+      "bias": true
+    }
+  ],
+  "outputDescription": [
+    "False",
+    "True"
+  ],
+  "stepSize": 1,
+  "trainingSettings": {
+    "optimizer": "rmsprop",
+    "loss": "mse",
+    "maxIterations": 100,
+    "minError": 0.05,
+    "learningRate": 0.1,
+    "momentum": 0.1
+  }
+}

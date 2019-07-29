@@ -1,0 +1,38 @@
+﻿@page
+<!--
+    * Author: Michel Schlatter
+    * Date: 28.07.2019
+    * Version: 1.0
+-->
+
+@{
+    Layout = "_Layout";
+}
+@using NeuralNetworkBuilder.Custom
+@section Scripts{
+    <link href="@Url.Content("~/Style/qunit-2.9.2.min.css?v=" + ViewUtils.GetVersion())" rel="stylesheet" />
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Frameworks/qunit-2.9.2.min.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Frameworks/tensorflow.min.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Modules/NeuralNetwork.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Modules/VectorGrid.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Pages/NeuralNetworkComputer.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Tests/NeuralNetworkTests.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Tests/ComputationMetricTests.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Tests/VectorGridTests.js?v=" + ViewUtils.GetVersion())"></script>
+}
+
+
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+
+
+@section RunScript{
+    var nnTest = new NeuralNetworkTests();
+    nnTest.runTests();
+
+    var computationMetricTests = new ComputationMetricTests();
+    computationMetricTests.runTests();
+
+    var vectorGridTests = new VectorGridTests();
+    vectorGridTests.runTests();
+}

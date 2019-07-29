@@ -1,0 +1,115 @@
+﻿<!--
+    * Author: Michel Schlatter
+    * Date: 28.07.2019
+    * Version: 1.0
+-->
+<div class="modal fade" id="datasetInfoDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modalTitle" class="modal-title">Dataset Info</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="textBody" class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Name</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label id="name"></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Description</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label id="description"></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Input Neurons</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label id="inputNeurons"></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Output Neurons</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label id="outputNeurons"></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Number of Dataitems</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label id="numberOfDataItems"></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Problemtype</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label id="problemType"></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Has Drawing Matrix</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label id="hasMatrix"></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Has a Predefined Architecture</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label id="hasPredefinedArchitecture"></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Has Predefined Training Settings</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label id="hasPredefinedTrainingSettings"></label>
+                    </div>
+                </div>
+
+                <div id="gridRow" class="row">
+                    <div class="col-md-4">
+                        <label>Input Example</label>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button id="btnView" type="button" class="btn btn-secondary">
+                    <span class="far fa-eye"></span> View
+
+                </button>
+                <button id="btnCancel" type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+

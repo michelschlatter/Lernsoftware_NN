@@ -1,0 +1,81 @@
+﻿/*
+ * Author: Michel Schlatter
+ * Date: 28.07.2019
+ * Version: 1.0
+ *
+ * Sources:
+ *https://bl.ocks.org/e9t/6073cd95c2a515a9f0ba
+ *https://codepen.io/dulldrums/pen/mqrddY
+ */
+
+text {
+    pointer-events: none;
+}
+
+.node:hover {
+    stroke: #999;
+    stroke-opacity: .6;
+    stroke-width: 4px;
+}
+
+
+.link {
+    stroke: #999;
+    stroke-opacity: .6;
+}
+
+
+    .link:hover {
+        stroke-width: 2px !important;
+    }
+
+.slider-container {
+    width: 50vw;
+    min-width: 400px;
+    margin: auto;
+}
+
+svg{
+    background-color: white;
+}
+
+.button:focus {
+    outline: 0;
+}
+
+.rz-pointer:focus {
+    outline: 0;
+}
+
+.rz-active:after {
+    background-color: #BEB6AF !important;
+}
+
+.rzslider .rz-bar {
+    background: #d8e0f3;
+}
+
+.rzslider .rz-tick {
+    background: #d8e0f3;
+}
+
+.rzslider .rz-tick {
+    top: -2.5px !important;
+    left: -2.5px !important;
+    width: 15px !important;
+    height: 15px !important;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 80px;
+    height: 28px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+

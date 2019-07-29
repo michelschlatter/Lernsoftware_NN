@@ -1,0 +1,187 @@
+﻿<!--
+    * Author: Michel Schlatter
+    * Date: 28.07.2019
+    * Version: 1.0
+-->
+
+<div class="modal fade" id="optimizerSettingsInfoDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modalTitle" class="modal-title">Optimizer Settings Info</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="textBody" class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Learning rate</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label>
+                            The learning rate defines how much of the calculated weight change should be applied to the current weight.
+                            If the learning rate is too high, the minimum of the loss function will be overshot.
+                            If the learning rate is too low, the training will take extremely long or will get stuck.
+                            <br/>
+                            Usually a learning rate between 0 and 1 is selected.
+                            For the adaptive learning rate optimizers or if a momentum has been specified rather small learning rates between 0.01 and 0.2 should be chosen.
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Momentum</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label>
+                            Momentum adds a fraction of the past weight change to the current weight change.
+                            It helps to accelerate the learning and improves the accuracy as it gives a bias for the direction of the gradient.
+                            The momentum can initially be set to 0.9.
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="btnCancel" type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="lossInfoDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modalTitle" class="modal-title">Loss Info</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="textBody" class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>General</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label>
+                            A loss function measures how well a neural network performs. 
+                            The goal of training a neural network is to minimize the loss function.
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Mean Squared Error</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label>
+                            The mean squared error is a popular loss function for regression problems. 
+                            It measures the quality of an estimator by calculating the average squared distances between the estimated points ỹ and actual points y.
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Softmax Cross Entropy</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label>Softmax Cross Entropy, also known as categorical cross entropy, is used for multi-class classification problems.</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="btnCancel" type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="optimizerInfoDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modalTitle" class="modal-title">Optimizer Info</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="textBody" class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>General</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label>
+                            An optimizer is used in order to minimize the loss function.
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Stochastic Gradient Descent (SGD)</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label>
+                            Stochastic gradient descent (SGD) is a popular optimization method in machine learning. 
+                            The method is based on the idea that at each iteration a data element is selected randomly
+                            and that the gradient of the entire dataset can be estimated due to this element.
+                            The advantage of this approach is that it is not necessary to go through the entire dataset in order to calculate the gradient.
+                            However, this method needs more iterations to converge, since the training is very noisy due to the estimation.
+                            <br />
+                            <b>Parameter: Learning rate (required)</b>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Stochastic Gradient Descent with Momentum (SGDM)</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label>
+                            Momentum adds a fraction of the past weight change to the current weight
+                            change and therefore helps SGD to find the right direction towards a minimum.
+                            This technique can lead to a better estimation of the actual gradient than the classic SGD without momentum.
+                            <br />
+                            <b>Parameters: Learning rate (required) and momentum (required)</b>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Adam and RMSprop</label>
+                    </div>
+                    <div class="col-md-8">
+                        <label>
+                            Adam and RMSprop are adaptive learning rate optimizers. This means that these optimizers automatically adjust the learning rate during training.
+                            With SGD and SGDM, the learning rate defined at the beginning always remains the same.
+                            However, it has been shown that an appropriate adjustment of the learning rate during training has a positive impact on the result.
+                            In the area close to the minimum it is desirable to have a small learning rate.
+                            If the minimum is further away, a larger learning rate is better to accelerate the training.
+                            Another advantage of adaptive learning rate optimizers is that the trial-and-error search for the optimal parameters can be avoided.
+                            <br />
+                            <b>
+                                Adam: Initial Learning rate (optional) <br />
+                                RMSprop: Initial learning rate (required), momentum (optional)
+                            </b>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="btnCancel" type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+

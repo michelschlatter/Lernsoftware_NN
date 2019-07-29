@@ -1,0 +1,93 @@
+﻿@page
+<!--
+    * Author: Michel Schlatter
+    * Date: 28.07.2019
+    * Version: 1.0
+-->
+
+@{
+    Layout = "_Layout";
+}
+@using NeuralNetworkBuilder.Custom
+@section Head{
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+}
+
+@section Scripts{
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Pages/Profile.js?v=" + ViewUtils.GetVersion())"></script>
+
+}
+
+<form id="profile">
+    <h1>Dataset Editor</h1>
+
+    <div class="row">
+        <div class="col-md-2">
+            <label class="labelInline">Email:</label>
+        </div>
+        <div class="col-md-3">
+            <input id="email" name="email" class="form-control" placeholder="Email">
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-5">
+            <button id="btnSaveEmail" class="btn btn-primary col-md-12">
+                <span class="far fa-save "></span> Save Email
+            </button>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <label class="labelInline">Old Password:</label>
+        </div>
+        <div class="col-md-3">
+            <input id="oldPassword" name="oldPassword" type="password" class="form-control" placeholder="Old Password">
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <label class="labelInline">New Password:</label>
+        </div>
+        <div class="col-md-3">
+            <input id="newPassword" name="newPassword" type="password" class="form-control" placeholder="New Password">
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <label class="labelInline">Confirm Password:</label>
+        </div>
+        <div class="col-md-3">
+            <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" placeholder="Confirm Password">
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-5">
+            <button id="btnSavePassword" class="btn btn-primary col-md-12">
+                <span class="far fa-save "></span> Change Password
+            </button>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+</form>
+
+@section RunScript{
+    var profile = new Profile();
+    profile.init();
+}

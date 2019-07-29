@@ -1,0 +1,137 @@
+﻿<!--
+    * Author: Michel Schlatter
+    * Date: 28.07.2019
+    * Version: 1.0
+-->
+
+<!-- Modal -->
+<div class="modal fade bs-modal-sm" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <br>
+            <div class="bs-example bs-example-tabs">
+
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="pill" href="#signin">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#signup">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#reset">Reset Password</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#why">Why?</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-body">
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in" id="reset">
+                        <div class="control-group">
+                            <label class="control-label" for="loginEmail">Email:</label>
+                            <div class="controls">
+                                <input id="resetEmail" name="resetEmail" type="email" class="form-control" placeholder="example@domain.com" class="input-medium" required>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="btnSignIn"></label>
+                            <div class="controls">
+                                <button id="btnResetPassword" name="btnResetPassword" class="btn btn-success">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade in" id="why">
+                        <p>You need a login so that we can save and restore your datasets.</p>
+                    </div>
+
+                    <div class="tab-pane fade active show" id="signin">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="control-group">
+                                    <label class="control-label" for="loginEmail">Email:</label>
+                                    <div class="controls">
+                                        <input required="" id="loginEmail" name="loginEmail" type="text" class="form-control" placeholder="example@domain.com" class="input-medium" required="">
+                                    </div>
+                                </div>
+
+                                <!-- Password input-->
+                                <div class="control-group">
+                                    <label class="control-label" for="loginPassword">Password:</label>
+                                    <div class="controls">
+                                        <input required="" id="loginPassword" name="loginPassword" class="form-control" type="password" placeholder="********" class="input-medium">
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label id="loginErrorMsg" class="control-label" style="color:red;"></label>
+                                </div>
+
+                                <!-- Button -->
+                                <div class="control-group">
+                                    <label class="control-label" for="btnSignIn"></label>
+                                    <div class="controls">
+                                        <button id="btnSignIn" name="btnSignIn" class="btn btn-success">Sign In</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade" id="signup">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <!-- Sign Up Form -->
+                                <!-- Text input-->
+                                <div class="control-group">
+                                    <label class="control-label" for="signUpEmail">Email:</label>
+                                    <div class="controls">
+                                        <input id="signUpEmail" name="signUpEmail" class="form-control" type="text" placeholder="example@domain.com" class="input-large" required="">
+                                    </div>
+                                </div>
+
+                                <!-- Password input-->
+                                <div class="control-group">
+                                    <label class="control-label" for="signUpPassword">Password:</label>
+                                    <div class="controls">
+                                        <input id="signUpPassword" name="signUpPassword" class="form-control" type="password" placeholder="********" class="input-large" required="">
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="control-group">
+                                    <label class="control-label" for="signUpPassword2">Re-Enter Password:</label>
+                                    <div class="controls">
+                                        <input id="signUpPassword2" class="form-control" name="signUpPassword2" type="password" placeholder="********" class="input-large" required="">
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label id="signUpErrorMsg" class="control-label" style="color:red;"></label>
+                                </div>
+
+                                <!-- Button -->
+                                <div class="control-group">
+                                    <label class="control-label" for="btnSignUp"></label>
+                                    <div class="controls">
+                                        <button id="btnSignUp" name="btnSignUp" class="btn btn-success">Sign Up</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <center>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+
+

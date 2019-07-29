@@ -1,0 +1,185 @@
+﻿@page
+<!--
+    * Author: Michel Schlatter
+    * Date: 28.07.2019
+    * Version: 1.0
+-->
+
+@{
+    Layout = "_Layout";
+}
+@using NeuralNetworkBuilder.Custom
+@section Scripts{
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Frameworks/tensorflow.min.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Pages/Playground.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Frameworks/d3.min.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Modules/NeuralNetworkVisualizer.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Modules/NeuralNetwork.js?v=" + ViewUtils.GetVersion())"></script>
+    <script type=" text/javascript" src="@Url.Content("~/Scripts/Helpers/NnDrawHelper.js?v=" + ViewUtils.GetVersion())"></script>
+    <link href="@Url.Content("~/Style/NeuralNetworkViewer.css?v=" + ViewUtils.GetVersion())" rel="stylesheet">
+
+}
+
+
+<h1>Playground</h1>
+
+<form id="playgroundContainer">
+
+    <div id="neuralNetworkBuilder">
+        <div class="spacer"></div>
+
+        <div id="inputLayer" class="row">
+            <div class="col-md-2">
+                <label class="labelInline">Input Layer:</label>
+            </div>
+            <div class="col-md-2">
+                <input name="neurons" type="number" class="form-control" placeholder="Neurons" value="2" disabled>
+            </div>
+            <div class="col-md-2">
+                <select name="activation" class="form-control" disabled>
+                    <option value="" selected>Activation</option>
+                    <option value="linear">Linear</option>
+                    <option value="relu">ReLU</option>
+                    <option value="sigmoid">Sigmoid</option>
+                    <option value="binaryStep">Binary Step</option>
+                    <option value="tanh">Tanh</option>
+                    <option value="softmax">Softmax</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select name="bias" class="form-control" disabled>
+                    <option value="" selected>Bias</option>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="spacer"></div>
+
+        <div id="outputLayer" class="row">
+            <div class="col-md-2">
+                <label class="labelInline">Output Layer:</label>
+            </div>
+            <div class="col-md-2">
+                <input name="neurons" type="number" class="form-control" placeholder="Neurons" value="1" disabled>
+            </div>
+            <div class="col-md-2">
+                <select name="activation" class="form-control">
+                    <option value="" disabled>Activation</option>
+                    <option value="linear" selected>Linear</option>
+                    <option value="relu">ReLU</option>
+                    <option value="sigmoid">Sigmoid</option>
+                    <option value="binaryStep">Binary Step</option>
+                    <option value="tanh">Tanh</option>
+                    <option value="softmax">Softmax</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select name="bias" class="form-control">
+                    <option value="" disabled>Bias</option>
+                    <option value="true">True</option>
+                    <option value="false" selected>False</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div style="margin-top:30px;"></div>
+
+        <div id="inputContainer" class="row">
+            <div class="col-md-2">
+                <label class="labelInline">Input Values:</label>
+            </div>
+            <div class="col-md-2">
+                <input id="inputNeuron1" name="neurons" type="number" class="form-control" placeholder="Input 1" value="1">
+            </div>
+            <div class="col-md-2">
+                <input id="inputNeuron2" name="neurons" type="number" class="form-control" placeholder="Input  2" value="1">
+            </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div id="weightContainer" class="row">
+            <div class="col-md-2">
+                <label class="labelInline">Weights:</label>
+            </div>
+            <div class="col-md-2">
+                <input id="weight1" name="weights" type="number" class="form-control" placeholder="Weight 1" value="0.5">
+            </div>
+            <div class="col-md-2">
+                <input id="weight2" name="weights" type="number" class="form-control" placeholder="Weight 2" value="0.5">
+            </div>
+        </div>
+
+        <div class="spacer"></div>
+
+
+        <div id="biasWeightContainer" class="row" style="display:none;">
+            <div class="col-md-2">
+                <label class="labelInline">Bias Weight:</label>
+            </div>
+            <div class="col-md-2">
+                <input id="biasWeight" name="weights" type="number" class="form-control" placeholder="Bias Weight" value="0.2">
+            </div>
+        </div>
+
+        <div style="margin-top:30px;"></div>
+
+        <div id="trainWeightsContainer" class="row" style="display:none;">
+            <div class="col-md-2">
+                <label class="labelInline">Train Weights:</label>
+            </div>
+            <div class="col-md-2">
+                <input id="learningRate" name="learningRate" type="number" class="form-control" placeholder="learning rate" value="">
+            </div>
+            <div class="col-md-4">
+                <button id="btnOneIteration" class="btn btn-primary col-md-12">
+                    <span class="fas fa-play "></span>
+                    <span>Perform one Training Epoch ('OR'-Problem)</span>
+                </button>
+            </div>
+            <div class="col-md-1">
+                <button id="trainingInfo" class="btn btn-primary" style="height:38px">
+                    <span class="fas fa-info" style="width:11px;"></span>
+                </button>
+            </div>
+        </div>
+
+        <div id="neuralNetworkViewer" style="width:100%;margin-top:30px;">
+            <div id="nnv" class="jumbotron" style="background-color:white;">
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="trainOrInfoDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="modalTitle" style="padding: 0 !important; margin: 0 !important;" class="modal-title col-md-12">OR-Problem</h5>
+
+                </div>
+                <div id="textBody" class="modal-body">
+                    The learning algorithm automatically calculates the correct weights (after n iterations) to solve the OR-problem.
+                    Once the correct weights are found, they are no longer adjusted by the algorithm. If no learning rate is specified, it is set to 1 by default.
+                    The following figure illustrates a possible separation function:
+                    <div class="spacer"></div>
+                    <img alt="Separation Function" src="~/Style/img/OR Problem.PNG" />
+                </div>
+                <div class="modal-footer">
+                    <button id="btnOk" type="button" class="btn btn-primary">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@section RunScript{
+    var playground = new Playground();
+    playground.init();
+}

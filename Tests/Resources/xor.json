@@ -1,0 +1,46 @@
+{
+  "Description": "The dataset represents the XOR-Problem. The output '0' represents the value 'false', the output '1' represents the value 'true'",
+  "ProblemType": "classification",
+  "items": [
+    {
+      "data": [ 0, 0 ],
+      "labels": [ 1, 0 ]
+    },
+    {
+      "data": [ 1, 0 ],
+      "labels": [ 0, 1 ]
+
+    },
+    {
+      "data": [ 0, 1 ],
+      "labels": [ 0, 1 ]
+    },
+    {
+      "data": [ 1, 1 ],
+      "labels": [ 1, 0 ]
+    }
+  ],
+  "layers": [
+    {
+      "neurons": 2
+    },
+    {
+      "neurons": 7,
+      "activation": "tanh",
+      "bias": true
+    },
+    {
+      "neurons": 2,
+      "activation": "tanh",
+      "bias": true
+    }
+  ],
+  "trainingSettings": {
+    "optimizer": "rmsprop",
+    "loss": "mse",
+    "maxIterations": 1000,
+    "minError": 0.05,
+    "learningRate": 0.1,
+    "momentum": 0.1
+  }
+}

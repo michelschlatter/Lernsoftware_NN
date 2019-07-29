@@ -1,0 +1,44 @@
+[
+  {
+    "outputFileName": "wwwroot/Bootstrap/css/bootstrap.min.css",
+    "inputFiles": [
+      "wwwroot/Bootstrap/css/bootstrap.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Style/Sidebar.min.css",
+    "inputFiles": [
+      "wwwroot/Style/Sidebar.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Style/General.min.css",
+    "inputFiles": [
+      "wwwroot/Style/General.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Bootstrap/js/bootstrap.min.js",
+    "inputFiles": [
+      "wwwroot/Bootstrap/js/bootstrap.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Scripts/Frameworks/jquery.validate.min.js",
+    "inputFiles": [
+      "wwwroot/Scripts/Frameworks/jquery.validate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Scripts/Frameworks/qunit-2.9.2.min.js",
+    "inputFiles": [
+      "wwwroot/Scripts/Frameworks/qunit-2.9.2.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Style/qunit-2.9.2.min.css",
+    "inputFiles": [
+      "wwwroot/Style/qunit-2.9.2.css"
+    ]
+  }
+]
