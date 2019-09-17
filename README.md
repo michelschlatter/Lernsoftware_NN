@@ -1,4 +1,4 @@
-# Learning Software Neural Network:
+# Neural Network Learning Software:
 
 https://blueneurons.ch/
 
